@@ -1,0 +1,27 @@
+@baseUrl = http://localhost:3333
+
+POST {{baseUrl}}/goals
+Content-Type: application/json
+
+{
+    "title": "Correr na rua",
+    "desiredWeeklyFrequency": 3
+}
+
+###
+
+GET {{baseUrl}}/pending-goals
+Content-Type: application/json
+
+###
+POST {{baseUrl}}/completions
+Content-Type: application/json
+
+{
+    "goalId": "xqlgquhl7dfqi07b39ofjhqy"
+}
+
+###
+GET {{baseUrl}}/get-week-summary
+Content-Type: application/json
+
