@@ -11,6 +11,7 @@ import { getPendingWeekGoalsRoute } from "../routes/get-pending-goals"
 import { createGoalCompletionRoute } from "../routes/create-goal-completion"
 import { getWeekSummaryRoute } from "../routes/get-week-summary"
 import fastifyCors from "@fastify/cors"
+import { env } from "../env"
 
 const app = fastify({
   logger: true,
@@ -30,8 +31,9 @@ app.register(getWeekSummaryRoute)
 
 app
   .listen({
-    port: 3333,
+    port: env.PORT,
+    host: "0.0.0.0"
   })
   .then(() => {
-    console.log("http server running")
+    console.log(`http server running in port ${env.PORT}`)
   })
