@@ -1,6 +1,7 @@
 import fastify from "fastify"
-import { createGoal } from "../functions/create-goal"
-import z from "zod"
+import type { FastifyLoggerOptions } from "fastify"
+import type { PinoLoggerOptions } from "fastify/types/logger"
+
 import {
   serializerCompiler,
   validatorCompiler,
@@ -13,8 +14,30 @@ import { getWeekSummaryRoute } from "../routes/get-week-summary"
 import fastifyCors from "@fastify/cors"
 import { env } from "../env"
 
+type EnvToLogger = FastifyLoggerOptions & PinoLoggerOptions
+
+const envToLogger: Record<typeof env.NODE_ENV, boolean | EnvToLogger> = {
+  development: true,
+  production: {
+    serializers: {
+      res: res => ({
+        statusCode: res.statusCode,
+      }),
+      req: req => ({
+        ip: req.headers["x-forwarded-for"] || req.ip,
+        method: req.method,
+        url: req.url,
+        hostname: req.hostname,
+        remoteAddress: req.socket.remoteAddress,
+        remotePort: req.socket.remotePort,
+      }),
+    },
+  },
+  test: false,
+}
+
 const app = fastify({
-  logger: true,
+  logger: envToLogger[env.NODE_ENV],
 }).withTypeProvider<ZodTypeProvider>()
 
 app.setValidatorCompiler(validatorCompiler)
@@ -32,7 +55,7 @@ app.register(getWeekSummaryRoute)
 app
   .listen({
     port: env.PORT,
-    host: "0.0.0.0"
+    host: "0.0.0.0",
   })
   .then(() => {
     console.log(`http server running in port ${env.PORT}`)
