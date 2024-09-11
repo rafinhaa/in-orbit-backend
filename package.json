@@ -10,7 +10,7 @@
     "db:migrate": "tsx --env-file=.env src/db/migrate.ts",
     "build": "tsup --config tsup.config.ts",
     "preprod": "node dist/db/migrate.js",
-    "prod": "node dist/server.js"
+    "prod": "node dist/http/server.js"
   },
   "keywords": [],
   "author": "Ives van Hoorne",
