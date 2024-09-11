@@ -1,8 +1,12 @@
 import { migrate } from "drizzle-orm/postgres-js/migrator"
 import { db, client } from "./"
+import { dirname } from "node:path";
 
-const { dirname } = require('path');
-const appDir = dirname(require?.main?.filename);
+const filename = require?.main?.filename ?? null
+
+if(!filename) throw new Error("filename not found!")
+
+const appDir = dirname(filename);
 
 if(!appDir) throw new Error("AppDir not found!")
 

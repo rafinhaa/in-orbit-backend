@@ -7,7 +7,10 @@
     "dev": "tsx watch --env-file=.env src/http/server.ts",
     "lint:fix": "npx @biomejs/biome format --write ./src",
     "db:seed": "tsx --env-file=.env src/db/seed.ts",
-    "db:migrate": "tsx --env-file=.env src/db/migrate.ts"
+    "db:migrate": "tsx --env-file=.env src/db/migrate.ts",
+    "build": "tsup --config tsup.config.ts",
+    "preprod": "node dist/db/migrate.js",
+    "prod": "node dist/server.js"
   },
   "keywords": [],
   "author": "Ives van Hoorne",
@@ -17,6 +20,7 @@
     "@types/node": "^22.5.4",
     "drizzle-kit": "^0.24.2",
     "fastify-type-provider-zod": "^2.0.0",
+    "tsup": "^8.2.4",
     "tsx": "^4.19.0",
     "typescript": "^5.6.2"
   },
