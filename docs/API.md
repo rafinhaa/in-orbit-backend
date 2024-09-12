@@ -116,3 +116,26 @@ Obtém a resumo das metas semanais
 | ------ | --------------------------------------------------------------------------------- |
 | `200`  | Resposta obtida com sucesso.                                                      |
 | `500`  | Erro no servidor.                                                                 |
+
+### Completar meta [/completions]
+
+Completa um meta já cadastrada
+
+- Method `POST`
+
+- Request (empty)
+
+  ```json
+  {
+    "goalId": "xqlgquhl7dfqi07b39ofjhqy"
+  }
+  ```
+
+- Response example
+
+- Response codes
+
+| Código | Descrição                                                                         |
+| ------ | --------------------------------------------------------------------------------- |
+| `200`  | Resposta obtida com sucesso.                                                      |
+| `500`  | Erro no servidor.                                                                 |
