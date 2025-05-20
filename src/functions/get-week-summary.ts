@@ -88,6 +88,9 @@ export async function getWeekSummary() {
     .from(goalsCompletedByWeekDay)
 
   return {
-    summary: summary[0],
+    summary: {
+      ...summary[0],
+      goalsPerDay: summary[0]?.goalsPerDay || {},
+    },
   }
 }
